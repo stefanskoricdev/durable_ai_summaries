@@ -2,6 +2,7 @@ package workflow
 
 import (
 	"api/internal/summary/activity"
+	"api/internal/summary/shared"
 	"fmt"
 	"time"
 
@@ -34,7 +35,7 @@ type InteractiveWorkflowState struct {
 	InitQuery           string
 	RefinementQuestions []string
 	RefinementAnswers   []string
-	SearchResults       []activity.SearchResult
+	SearchResults       []shared.SearchResult
 	SearchSelection     *int64
 }
 
@@ -44,7 +45,7 @@ func InteractiveWorkflow(ctx workflow.Context, params InteractiveWorkflowParams)
 		InitQuery:           "",
 		RefinementQuestions: []string{},
 		RefinementAnswers:   []string{},
-		SearchResults:       []activity.SearchResult{},
+		SearchResults:       []shared.SearchResult{},
 		SearchSelection:     nil,
 	}
 
@@ -97,7 +98,7 @@ func InteractiveWorkflow(ctx workflow.Context, params InteractiveWorkflowParams)
 		}
 
 		if state.Status == StatusPending {
-			var output activity.WithRefineOutput
+			var output shared.WithRefineOutput
 
 			err := workflow.ExecuteActivity(ctx, activity.Refine, state.InitQuery).Get(ctx, &output)
 
@@ -118,7 +119,7 @@ func InteractiveWorkflow(ctx workflow.Context, params InteractiveWorkflowParams)
 		}
 
 		if state.Status == StatusRefined {
-			var output activity.WithRefineOutput
+			var output shared.WithRefineOutput
 
 			enriched_query := fmt.Sprintf(`Original query: %s \n\n Additional context from clarifications: \n`, state.InitQuery)
 
