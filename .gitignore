@@ -1,0 +1,14 @@
+#dependencies
+node_modules
+
+tmp
+
+bin/*
+!bin/.gitkeep
+
+.env
+
+#local toml files
+
+config*.toml
+!config.toml
