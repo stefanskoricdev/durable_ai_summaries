@@ -24,3 +24,17 @@ This project leverages the following key technologies:
 - GO
 - Temporal Workflows
 - OpenAI Models
+
+## Project Status
+
+This is strictly a demo project designed to showcase the integration and capabilities of Temporal Workflows and OpenAI models for content processing.
+
+It is explicitly not production-ready. This project currently lacks essential features required for production environments, including but not limited to:
+
+- Robust security measures
+- Comprehensive input validation
+- Extensive automated tests
+- Error handling for all edge cases
+- Scalability optimizations
+
+This project should be used for demonstration, learning, and proof-of-concept purposes only.This is a demo project currently under active development.
