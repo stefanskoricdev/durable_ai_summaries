@@ -24,7 +24,7 @@ func main() {
 
 	temporalClient, err := client.Dial(client.Options{
 		HostPort:  client.DefaultHostPort,
-		Namespace: os.Getenv("TEMPORAL_SUMMARIZE_NAMESPACE"),
+		Namespace: "summarize",
 		Logger:    util.CustomLogger{},
 	})
 
@@ -55,7 +55,7 @@ func main() {
 			ctx,
 			client.StartWorkflowOptions{
 				ID:        workflowId,
-				TaskQueue: os.Getenv("TEMPORAL_SUMMARIZE_TASK_QUEUE"),
+				TaskQueue: "summarize",
 			},
 			workflow.InteractiveWorkflow,
 			struct{ InitQuery string }{

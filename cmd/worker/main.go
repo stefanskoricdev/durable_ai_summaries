@@ -44,6 +44,17 @@ func RegisterNamespace(ctx context.Context, hostPort, namespace string) error {
 }
 
 func main() {
+
+	err := RegisterNamespace(
+		context.Background(),
+		client.DefaultHostPort,
+		os.Getenv("TEMPORAL_SUMMARIZE_NAMESPACE"),
+	)
+
+	if err != nil {
+		log.Fatalln("Failed to register Temporal namespace:", err.Error())
+	}
+
 	temporalClient, err := client.Dial(client.Options{
 		HostPort:  client.DefaultHostPort,
 		Namespace: os.Getenv("TEMPORAL_SUMMARIZE_NAMESPACE"),
@@ -54,16 +65,6 @@ func main() {
 	}
 
 	defer temporalClient.Close()
-
-	err = RegisterNamespace(
-		context.Background(),
-		client.DefaultHostPort,
-		os.Getenv("TEMPORAL_SUMMARIZE_NAMESPACE"),
-	)
-
-	if err != nil {
-		log.Fatalln("Failed to register Temporal namespace:", err.Error())
-	}
 
 	openAPIClient := openai.NewClient()
 
